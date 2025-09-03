@@ -8,9 +8,10 @@ import 'package:immich_mobile/domain/models/asset/asset_metadata.model.dart'
 import 'dart:typed_data' as i3;
 import 'package:immich_mobile/infrastructure/entities/remote_asset_metadata.entity.dart'
     as i4;
+import 'package:drift/extensions/json1.dart' as i5;
 import 'package:immich_mobile/infrastructure/entities/remote_asset.entity.drift.dart'
-    as i5;
-import 'package:drift/internal/modular.dart' as i6;
+    as i6;
+import 'package:drift/internal/modular.dart' as i7;
 
 typedef $$RemoteAssetMetadataEntityTableCreateCompanionBuilder =
     i1.RemoteAssetMetadataEntityCompanion Function({
@@ -38,31 +39,31 @@ final class $$RemoteAssetMetadataEntityTableReferences
     super.$_typedResult,
   );
 
-  static i5.$RemoteAssetEntityTable _assetIdTable(i0.GeneratedDatabase db) =>
-      i6.ReadDatabaseContainer(db)
-          .resultSet<i5.$RemoteAssetEntityTable>('remote_asset_entity')
+  static i6.$RemoteAssetEntityTable _assetIdTable(i0.GeneratedDatabase db) =>
+      i7.ReadDatabaseContainer(db)
+          .resultSet<i6.$RemoteAssetEntityTable>('remote_asset_entity')
           .createAlias(
             i0.$_aliasNameGenerator(
-              i6.ReadDatabaseContainer(db)
+              i7.ReadDatabaseContainer(db)
                   .resultSet<i1.$RemoteAssetMetadataEntityTable>(
                     'remote_asset_metadata_entity',
                   )
                   .assetId,
-              i6.ReadDatabaseContainer(
+              i7.ReadDatabaseContainer(
                 db,
-              ).resultSet<i5.$RemoteAssetEntityTable>('remote_asset_entity').id,
+              ).resultSet<i6.$RemoteAssetEntityTable>('remote_asset_entity').id,
             ),
           );
 
-  i5.$$RemoteAssetEntityTableProcessedTableManager get assetId {
+  i6.$$RemoteAssetEntityTableProcessedTableManager get assetId {
     final $_column = $_itemColumn<String>('asset_id')!;
 
-    final manager = i5
+    final manager = i6
         .$$RemoteAssetEntityTableTableManager(
           $_db,
-          i6.ReadDatabaseContainer(
+          i7.ReadDatabaseContainer(
             $_db,
-          ).resultSet<i5.$RemoteAssetEntityTable>('remote_asset_entity'),
+          ).resultSet<i6.$RemoteAssetEntityTable>('remote_asset_entity'),
         )
         .filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_assetIdTable($_db));
@@ -93,6 +94,11 @@ class $$RemoteAssetMetadataEntityTableFilterComposer
     builder: (column) => i0.ColumnWithTypeConverterFilters(column),
   );
 
+  i0.ColumnFilters<String> get cloudId => $composableBuilder(
+    column: $table.cloudId,
+    builder: (column) => i0.ColumnFilters(column),
+  );
+
   i0.ColumnWithTypeConverterFilters<
     Map<String, Object?>,
     Map<String, Object>,
@@ -103,24 +109,24 @@ class $$RemoteAssetMetadataEntityTableFilterComposer
     builder: (column) => i0.ColumnWithTypeConverterFilters(column),
   );
 
-  i5.$$RemoteAssetEntityTableFilterComposer get assetId {
-    final i5.$$RemoteAssetEntityTableFilterComposer composer = $composerBuilder(
+  i6.$$RemoteAssetEntityTableFilterComposer get assetId {
+    final i6.$$RemoteAssetEntityTableFilterComposer composer = $composerBuilder(
       composer: this,
       getCurrentColumn: (t) => t.assetId,
-      referencedTable: i6.ReadDatabaseContainer(
+      referencedTable: i7.ReadDatabaseContainer(
         $db,
-      ).resultSet<i5.$RemoteAssetEntityTable>('remote_asset_entity'),
+      ).resultSet<i6.$RemoteAssetEntityTable>('remote_asset_entity'),
       getReferencedColumn: (t) => t.id,
       builder:
           (
             joinBuilder, {
             $addJoinBuilderToRootComposer,
             $removeJoinBuilderFromRootComposer,
-          }) => i5.$$RemoteAssetEntityTableFilterComposer(
+          }) => i6.$$RemoteAssetEntityTableFilterComposer(
             $db: $db,
-            $table: i6.ReadDatabaseContainer(
+            $table: i7.ReadDatabaseContainer(
               $db,
-            ).resultSet<i5.$RemoteAssetEntityTable>('remote_asset_entity'),
+            ).resultSet<i6.$RemoteAssetEntityTable>('remote_asset_entity'),
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -146,30 +152,35 @@ class $$RemoteAssetMetadataEntityTableOrderingComposer
     builder: (column) => i0.ColumnOrderings(column),
   );
 
+  i0.ColumnOrderings<String> get cloudId => $composableBuilder(
+    column: $table.cloudId,
+    builder: (column) => i0.ColumnOrderings(column),
+  );
+
   i0.ColumnOrderings<i3.Uint8List> get value => $composableBuilder(
     column: $table.value,
     builder: (column) => i0.ColumnOrderings(column),
   );
 
-  i5.$$RemoteAssetEntityTableOrderingComposer get assetId {
-    final i5.$$RemoteAssetEntityTableOrderingComposer composer =
+  i6.$$RemoteAssetEntityTableOrderingComposer get assetId {
+    final i6.$$RemoteAssetEntityTableOrderingComposer composer =
         $composerBuilder(
           composer: this,
           getCurrentColumn: (t) => t.assetId,
-          referencedTable: i6.ReadDatabaseContainer(
+          referencedTable: i7.ReadDatabaseContainer(
             $db,
-          ).resultSet<i5.$RemoteAssetEntityTable>('remote_asset_entity'),
+          ).resultSet<i6.$RemoteAssetEntityTable>('remote_asset_entity'),
           getReferencedColumn: (t) => t.id,
           builder:
               (
                 joinBuilder, {
                 $addJoinBuilderToRootComposer,
                 $removeJoinBuilderFromRootComposer,
-              }) => i5.$$RemoteAssetEntityTableOrderingComposer(
+              }) => i6.$$RemoteAssetEntityTableOrderingComposer(
                 $db: $db,
-                $table: i6.ReadDatabaseContainer(
+                $table: i7.ReadDatabaseContainer(
                   $db,
-                ).resultSet<i5.$RemoteAssetEntityTable>('remote_asset_entity'),
+                ).resultSet<i6.$RemoteAssetEntityTable>('remote_asset_entity'),
                 $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
                 joinBuilder: joinBuilder,
                 $removeJoinBuilderFromRootComposer:
@@ -194,29 +205,32 @@ class $$RemoteAssetMetadataEntityTableAnnotationComposer
   get key =>
       $composableBuilder(column: $table.key, builder: (column) => column);
 
+  i0.GeneratedColumn<String> get cloudId =>
+      $composableBuilder(column: $table.cloudId, builder: (column) => column);
+
   i0.GeneratedColumnWithTypeConverter<Map<String, Object?>, i3.Uint8List>
   get value =>
       $composableBuilder(column: $table.value, builder: (column) => column);
 
-  i5.$$RemoteAssetEntityTableAnnotationComposer get assetId {
-    final i5.$$RemoteAssetEntityTableAnnotationComposer composer =
+  i6.$$RemoteAssetEntityTableAnnotationComposer get assetId {
+    final i6.$$RemoteAssetEntityTableAnnotationComposer composer =
         $composerBuilder(
           composer: this,
           getCurrentColumn: (t) => t.assetId,
-          referencedTable: i6.ReadDatabaseContainer(
+          referencedTable: i7.ReadDatabaseContainer(
             $db,
-          ).resultSet<i5.$RemoteAssetEntityTable>('remote_asset_entity'),
+          ).resultSet<i6.$RemoteAssetEntityTable>('remote_asset_entity'),
           getReferencedColumn: (t) => t.id,
           builder:
               (
                 joinBuilder, {
                 $addJoinBuilderToRootComposer,
                 $removeJoinBuilderFromRootComposer,
-              }) => i5.$$RemoteAssetEntityTableAnnotationComposer(
+              }) => i6.$$RemoteAssetEntityTableAnnotationComposer(
                 $db: $db,
-                $table: i6.ReadDatabaseContainer(
+                $table: i7.ReadDatabaseContainer(
                   $db,
-                ).resultSet<i5.$RemoteAssetEntityTable>('remote_asset_entity'),
+                ).resultSet<i6.$RemoteAssetEntityTable>('remote_asset_entity'),
                 $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
                 joinBuilder: joinBuilder,
                 $removeJoinBuilderFromRootComposer:
@@ -360,6 +374,10 @@ typedef $$RemoteAssetMetadataEntityTableProcessedTableManager =
       i1.RemoteAssetMetadataEntityData,
       i0.PrefetchHooks Function({bool assetId})
     >;
+i0.Index get uQRemoteAssetMetadataCloudId => i0.Index(
+  'UQ_remote_asset_metadata_cloud_id',
+  'CREATE UNIQUE INDEX IF NOT EXISTS UQ_remote_asset_metadata_cloud_id ON remote_asset_metadata_entity (cloud_id) WHERE("key" = \'mobile-app\')',
+);
 
 class $RemoteAssetMetadataEntityTable extends i4.RemoteAssetMetadataEntity
     with
@@ -400,6 +418,21 @@ class $RemoteAssetMetadataEntityTable extends i4.RemoteAssetMetadataEntity
       ).withConverter<i2.RemoteAssetMetadataKey>(
         i1.$RemoteAssetMetadataEntityTable.$converterkey,
       );
+  static const i0.VerificationMeta _cloudIdMeta = const i0.VerificationMeta(
+    'cloudId',
+  );
+  @override
+  late final i0.GeneratedColumn<String> cloudId = i0.GeneratedColumn<String>(
+    'cloud_id',
+    aliasedName,
+    false,
+    generatedAs: i0.GeneratedAs(
+      i5.JsonExtensions(key).jsonExtract(r'$.iCloudId'),
+      false,
+    ),
+    type: i0.DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   @override
   late final i0.GeneratedColumnWithTypeConverter<
     Map<String, Object?>,
@@ -416,7 +449,7 @@ class $RemoteAssetMetadataEntityTable extends i4.RemoteAssetMetadataEntity
         i1.$RemoteAssetMetadataEntityTable.$convertervalue,
       );
   @override
-  List<i0.GeneratedColumn> get $columns => [assetId, key, value];
+  List<i0.GeneratedColumn> get $columns => [assetId, key, cloudId, value];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -436,6 +469,12 @@ class $RemoteAssetMetadataEntityTable extends i4.RemoteAssetMetadataEntity
       );
     } else if (isInserting) {
       context.missing(_assetIdMeta);
+    }
+    if (data.containsKey('cloud_id')) {
+      context.handle(
+        _cloudIdMeta,
+        cloudId.isAcceptableOrUnknown(data['cloud_id']!, _cloudIdMeta),
+      );
     }
     return context;
   }
@@ -459,6 +498,10 @@ class $RemoteAssetMetadataEntityTable extends i4.RemoteAssetMetadataEntity
           data['${effectivePrefix}key'],
         )!,
       ),
+      cloudId: attachedDatabase.typeMapping.read(
+        i0.DriftSqlType.string,
+        data['${effectivePrefix}cloud_id'],
+      )!,
       value: i1.$RemoteAssetMetadataEntityTable.$convertervalue.fromSql(
         attachedDatabase.typeMapping.read(
           i0.DriftSqlType.blob,
@@ -487,10 +530,12 @@ class RemoteAssetMetadataEntityData extends i0.DataClass
     implements i0.Insertable<i1.RemoteAssetMetadataEntityData> {
   final String assetId;
   final i2.RemoteAssetMetadataKey key;
+  final String cloudId;
   final Map<String, Object?> value;
   const RemoteAssetMetadataEntityData({
     required this.assetId,
     required this.key,
+    required this.cloudId,
     required this.value,
   });
   @override
@@ -518,6 +563,7 @@ class RemoteAssetMetadataEntityData extends i0.DataClass
     return RemoteAssetMetadataEntityData(
       assetId: serializer.fromJson<String>(json['assetId']),
       key: serializer.fromJson<i2.RemoteAssetMetadataKey>(json['key']),
+      cloudId: serializer.fromJson<String>(json['cloudId']),
       value: i1.$RemoteAssetMetadataEntityTable.$convertervalue.fromJson(
         serializer.fromJson<Object?>(json['value']),
       ),
@@ -529,6 +575,7 @@ class RemoteAssetMetadataEntityData extends i0.DataClass
     return <String, dynamic>{
       'assetId': serializer.toJson<String>(assetId),
       'key': serializer.toJson<i2.RemoteAssetMetadataKey>(key),
+      'cloudId': serializer.toJson<String>(cloudId),
       'value': serializer.toJson<Object?>(
         i1.$RemoteAssetMetadataEntityTable.$convertervalue.toJson(value),
       ),
@@ -538,40 +585,34 @@ class RemoteAssetMetadataEntityData extends i0.DataClass
   i1.RemoteAssetMetadataEntityData copyWith({
     String? assetId,
     i2.RemoteAssetMetadataKey? key,
+    String? cloudId,
     Map<String, Object?>? value,
   }) => i1.RemoteAssetMetadataEntityData(
     assetId: assetId ?? this.assetId,
     key: key ?? this.key,
+    cloudId: cloudId ?? this.cloudId,
     value: value ?? this.value,
   );
-  RemoteAssetMetadataEntityData copyWithCompanion(
-    i1.RemoteAssetMetadataEntityCompanion data,
-  ) {
-    return RemoteAssetMetadataEntityData(
-      assetId: data.assetId.present ? data.assetId.value : this.assetId,
-      key: data.key.present ? data.key.value : this.key,
-      value: data.value.present ? data.value.value : this.value,
-    );
-  }
-
   @override
   String toString() {
     return (StringBuffer('RemoteAssetMetadataEntityData(')
           ..write('assetId: $assetId, ')
           ..write('key: $key, ')
+          ..write('cloudId: $cloudId, ')
           ..write('value: $value')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(assetId, key, value);
+  int get hashCode => Object.hash(assetId, key, cloudId, value);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is i1.RemoteAssetMetadataEntityData &&
           other.assetId == this.assetId &&
           other.key == this.key &&
+          other.cloudId == this.cloudId &&
           other.value == this.value);
 }
 

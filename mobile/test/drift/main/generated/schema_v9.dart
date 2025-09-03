@@ -2964,6 +2964,13 @@ class RemoteAssetMetadataEntity extends Table
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
+  late final GeneratedColumn<String> cloudId = GeneratedColumn<String>(
+    'cloud_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   late final GeneratedColumn<Uint8List> value = GeneratedColumn<Uint8List>(
     'value',
     aliasedName,
@@ -2972,7 +2979,7 @@ class RemoteAssetMetadataEntity extends Table
     requiredDuringInsert: true,
   );
   @override
-  List<GeneratedColumn> get $columns => [assetId, key, value];
+  List<GeneratedColumn> get $columns => [assetId, key, cloudId, value];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -2994,6 +3001,10 @@ class RemoteAssetMetadataEntity extends Table
       key: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}key'],
+      )!,
+      cloudId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}cloud_id'],
       )!,
       value: attachedDatabase.typeMapping.read(
         DriftSqlType.blob,
@@ -3017,10 +3028,12 @@ class RemoteAssetMetadataEntityData extends DataClass
     implements Insertable<RemoteAssetMetadataEntityData> {
   final String assetId;
   final String key;
+  final String cloudId;
   final Uint8List value;
   const RemoteAssetMetadataEntityData({
     required this.assetId,
     required this.key,
+    required this.cloudId,
     required this.value,
   });
   @override
@@ -3028,6 +3041,7 @@ class RemoteAssetMetadataEntityData extends DataClass
     final map = <String, Expression>{};
     map['asset_id'] = Variable<String>(assetId);
     map['key'] = Variable<String>(key);
+    map['cloud_id'] = Variable<String>(cloudId);
     map['value'] = Variable<Uint8List>(value);
     return map;
   }
@@ -3040,6 +3054,7 @@ class RemoteAssetMetadataEntityData extends DataClass
     return RemoteAssetMetadataEntityData(
       assetId: serializer.fromJson<String>(json['assetId']),
       key: serializer.fromJson<String>(json['key']),
+      cloudId: serializer.fromJson<String>(json['cloudId']),
       value: serializer.fromJson<Uint8List>(json['value']),
     );
   }
@@ -3049,6 +3064,7 @@ class RemoteAssetMetadataEntityData extends DataClass
     return <String, dynamic>{
       'assetId': serializer.toJson<String>(assetId),
       'key': serializer.toJson<String>(key),
+      'cloudId': serializer.toJson<String>(cloudId),
       'value': serializer.toJson<Uint8List>(value),
     };
   }
@@ -3056,10 +3072,12 @@ class RemoteAssetMetadataEntityData extends DataClass
   RemoteAssetMetadataEntityData copyWith({
     String? assetId,
     String? key,
+    String? cloudId,
     Uint8List? value,
   }) => RemoteAssetMetadataEntityData(
     assetId: assetId ?? this.assetId,
     key: key ?? this.key,
+    cloudId: cloudId ?? this.cloudId,
     value: value ?? this.value,
   );
   RemoteAssetMetadataEntityData copyWithCompanion(
@@ -3068,6 +3086,7 @@ class RemoteAssetMetadataEntityData extends DataClass
     return RemoteAssetMetadataEntityData(
       assetId: data.assetId.present ? data.assetId.value : this.assetId,
       key: data.key.present ? data.key.value : this.key,
+      cloudId: data.cloudId.present ? data.cloudId.value : this.cloudId,
       value: data.value.present ? data.value.value : this.value,
     );
   }
@@ -3077,19 +3096,22 @@ class RemoteAssetMetadataEntityData extends DataClass
     return (StringBuffer('RemoteAssetMetadataEntityData(')
           ..write('assetId: $assetId, ')
           ..write('key: $key, ')
+          ..write('cloudId: $cloudId, ')
           ..write('value: $value')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(assetId, key, $driftBlobEquality.hash(value));
+  int get hashCode =>
+      Object.hash(assetId, key, cloudId, $driftBlobEquality.hash(value));
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is RemoteAssetMetadataEntityData &&
           other.assetId == this.assetId &&
           other.key == this.key &&
+          other.cloudId == this.cloudId &&
           $driftBlobEquality.equals(other.value, this.value));
 }
 
@@ -3097,27 +3119,33 @@ class RemoteAssetMetadataEntityCompanion
     extends UpdateCompanion<RemoteAssetMetadataEntityData> {
   final Value<String> assetId;
   final Value<String> key;
+  final Value<String> cloudId;
   final Value<Uint8List> value;
   const RemoteAssetMetadataEntityCompanion({
     this.assetId = const Value.absent(),
     this.key = const Value.absent(),
+    this.cloudId = const Value.absent(),
     this.value = const Value.absent(),
   });
   RemoteAssetMetadataEntityCompanion.insert({
     required String assetId,
     required String key,
+    required String cloudId,
     required Uint8List value,
   }) : assetId = Value(assetId),
        key = Value(key),
+       cloudId = Value(cloudId),
        value = Value(value);
   static Insertable<RemoteAssetMetadataEntityData> custom({
     Expression<String>? assetId,
     Expression<String>? key,
+    Expression<String>? cloudId,
     Expression<Uint8List>? value,
   }) {
     return RawValuesInsertable({
       if (assetId != null) 'asset_id': assetId,
       if (key != null) 'key': key,
+      if (cloudId != null) 'cloud_id': cloudId,
       if (value != null) 'value': value,
     });
   }
@@ -3125,11 +3153,13 @@ class RemoteAssetMetadataEntityCompanion
   RemoteAssetMetadataEntityCompanion copyWith({
     Value<String>? assetId,
     Value<String>? key,
+    Value<String>? cloudId,
     Value<Uint8List>? value,
   }) {
     return RemoteAssetMetadataEntityCompanion(
       assetId: assetId ?? this.assetId,
       key: key ?? this.key,
+      cloudId: cloudId ?? this.cloudId,
       value: value ?? this.value,
     );
   }
@@ -3143,6 +3173,9 @@ class RemoteAssetMetadataEntityCompanion
     if (key.present) {
       map['key'] = Variable<String>(key.value);
     }
+    if (cloudId.present) {
+      map['cloud_id'] = Variable<String>(cloudId.value);
+    }
     if (value.present) {
       map['value'] = Variable<Uint8List>(value.value);
     }
@@ -3154,6 +3187,7 @@ class RemoteAssetMetadataEntityCompanion
     return (StringBuffer('RemoteAssetMetadataEntityCompanion(')
           ..write('assetId: $assetId, ')
           ..write('key: $key, ')
+          ..write('cloudId: $cloudId, ')
           ..write('value: $value')
           ..write(')'))
         .toString();
@@ -6883,6 +6917,10 @@ class DatabaseAtV9 extends GeneratedDatabase {
   late final PersonEntity personEntity = PersonEntity(this);
   late final AssetFaceEntity assetFaceEntity = AssetFaceEntity(this);
   late final StoreEntity storeEntity = StoreEntity(this);
+  late final Index uQRemoteAssetMetadataCloudId = Index(
+    'UQ_remote_asset_metadata_cloud_id',
+    'CREATE UNIQUE INDEX IF NOT EXISTS UQ_remote_asset_metadata_cloud_id ON remote_asset_metadata_entity (cloud_id) WHERE("key" = \'mobile-app\')',
+  );
   late final Index idxLatLng = Index(
     'idx_lat_lng',
     'CREATE INDEX IF NOT EXISTS idx_lat_lng ON remote_exif_entity (latitude, longitude)',
@@ -6916,6 +6954,7 @@ class DatabaseAtV9 extends GeneratedDatabase {
     personEntity,
     assetFaceEntity,
     storeEntity,
+    uQRemoteAssetMetadataCloudId,
     idxLatLng,
   ];
   @override

@@ -3464,6 +3464,7 @@ final class Schema9 extends i0.VersionedSchema {
     personEntity,
     assetFaceEntity,
     storeEntity,
+    uQRemoteAssetMetadataCloudId,
     idxLatLng,
   ];
   late final Shape16 userEntity = Shape16(
@@ -3631,7 +3632,7 @@ final class Schema9 extends i0.VersionedSchema {
       withoutRowId: true,
       isStrict: true,
       tableConstraints: ['PRIMARY KEY(asset_id, "key")'],
-      columns: [_column_36, _column_91, _column_27],
+      columns: [_column_36, _column_91, _column_92, _column_27],
       attachedDatabase: database,
     ),
     alias: null,
@@ -3803,6 +3804,10 @@ final class Schema9 extends i0.VersionedSchema {
     ),
     alias: null,
   );
+  final i1.Index uQRemoteAssetMetadataCloudId = i1.Index(
+    'UQ_remote_asset_metadata_cloud_id',
+    'CREATE UNIQUE INDEX IF NOT EXISTS UQ_remote_asset_metadata_cloud_id ON remote_asset_metadata_entity (cloud_id) WHERE("key" = \'mobile-app\')',
+  );
   final i1.Index idxLatLng = i1.Index(
     'idx_lat_lng',
     'CREATE INDEX IF NOT EXISTS idx_lat_lng ON remote_exif_entity (latitude, longitude)',
@@ -3851,6 +3856,8 @@ class Shape20 extends i0.VersionedTable {
       columnsByName['asset_id']! as i1.GeneratedColumn<String>;
   i1.GeneratedColumn<String> get key =>
       columnsByName['key']! as i1.GeneratedColumn<String>;
+  i1.GeneratedColumn<String> get cloudId =>
+      columnsByName['cloud_id']! as i1.GeneratedColumn<String>;
   i1.GeneratedColumn<i2.Uint8List> get value =>
       columnsByName['value']! as i1.GeneratedColumn<i2.Uint8List>;
 }
@@ -3858,6 +3865,13 @@ class Shape20 extends i0.VersionedTable {
 i1.GeneratedColumn<String> _column_91(String aliasedName) =>
     i1.GeneratedColumn<String>(
       'key',
+      aliasedName,
+      false,
+      type: i1.DriftSqlType.string,
+    );
+i1.GeneratedColumn<String> _column_92(String aliasedName) =>
+    i1.GeneratedColumn<String>(
+      'cloud_id',
       aliasedName,
       false,
       type: i1.DriftSqlType.string,

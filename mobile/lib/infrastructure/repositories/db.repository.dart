@@ -131,6 +131,7 @@ class Drift extends $Drift implements IDatabaseRepository {
             await m.createIndex(v9.idxLocalAssetCloudId);
             // Create new table
             await m.createTable(v9.remoteAssetMetadataEntity);
+            await m.createIndex(v9.uQRemoteAssetMetadataCloudId);
           },
         ),
       );

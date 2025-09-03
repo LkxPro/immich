@@ -70,7 +70,7 @@ Future<void> migrateDatabaseIfNeeded(Isar db, Drift drift) async {
 
   if (version < 15) {
     try {
-      await _updateCloudId(drift);
+      await updateCloudId(drift);
     } catch (error) {
       Logger("Migration").warning("Error occurred while updating cloud ID: $error");
       // do not update version when error occurs so this is retried the next time
@@ -187,7 +187,7 @@ Future<void> migrateDeviceAssetToSqlite(Isar db, Drift drift) async {
   }
 }
 
-Future<void> _updateCloudId(Drift drift) async {
+Future<void> updateCloudId(Drift drift) async {
   // Android do not have a concept of cloud IDs
   if (Platform.isAndroid) {
     return;

@@ -108,6 +108,7 @@ abstract class $Drift extends i0.GeneratedDatabase {
     personEntity,
     assetFaceEntity,
     storeEntity,
+    i9.uQRemoteAssetMetadataCloudId,
     i10.idxLatLng,
   ];
   @override
