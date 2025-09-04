@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { BaseConfig } from 'src/utils/media';
+import { H264Config } from 'src/utils/media';
 import { VideoCodec, TranscodeHardwareAcceleration, ToneMapping, CQMode } from 'src/enum';
 import { VideoStreamInfo } from 'src/types';
 
@@ -19,7 +19,7 @@ const defaultConfig = {
   gopSize: 0,
   npl: 0,
   temporalAQ: false,
-  cqMode: CQMode.Crf,
+  cqMode: CQMode.Cqp,
   acceptedVideoCodecs: [VideoCodec.H264],
   acceptedAudioCodecs: [],
   acceptedContainers: [],
@@ -27,10 +27,10 @@ const defaultConfig = {
 };
 
 describe('Media Resolution Logic Tests', () => {
-  let config: BaseConfig;
+  let config: H264Config;
 
   beforeEach(() => {
-    config = new BaseConfig(defaultConfig);
+    config = new H264Config(defaultConfig);
   });
 
   describe('getTargetResolution', () => {
@@ -52,7 +52,7 @@ describe('Media Resolution Logic Tests', () => {
 
     test('should return maximum dimension when targetResolution is original', () => {
       const originalConfig = { ...defaultConfig, targetResolution: 'original' };
-      const configOriginal = new BaseConfig(originalConfig);
+      const configOriginal = new H264Config(originalConfig);
       
       const landscapeVideo: VideoStreamInfo = {
         index: 0,

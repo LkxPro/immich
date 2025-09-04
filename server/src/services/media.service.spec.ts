@@ -473,7 +473,7 @@ describe(MediaService.name, () => {
         expect.any(String),
         expect.objectContaining({
           inputOptions: expect.any(Array),
-          outputOptions: expect.arrayContaining([expect.stringContaining('scale=-2:1440')]),
+          outputOptions: expect.arrayContaining([expect.stringContaining('scale=1440:-2')]),
           twoPass: false,
         }),
       );
@@ -1442,7 +1442,7 @@ describe(MediaService.name, () => {
         expect.any(String),
         expect.objectContaining({
           inputOptions: expect.any(Array),
-          outputOptions: expect.arrayContaining([expect.stringMatching(/scale(_.+)?=720:-2/)]),
+          outputOptions: expect.arrayContaining([expect.stringMatching(/scale(_.+)?=-2:720/)]),
           twoPass: false,
         }),
       );
@@ -1459,7 +1459,7 @@ describe(MediaService.name, () => {
         expect.any(String),
         expect.objectContaining({
           inputOptions: expect.any(Array),
-          outputOptions: expect.arrayContaining([expect.stringMatching(/scale(_.+)?=-2:354/)]),
+          outputOptions: expect.arrayContaining([expect.stringMatching(/scale(_.+)?=1586:-2/)]),
           twoPass: false,
         }),
       );
@@ -1476,7 +1476,7 @@ describe(MediaService.name, () => {
         expect.any(String),
         expect.objectContaining({
           inputOptions: expect.any(Array),
-          outputOptions: expect.arrayContaining([expect.stringMatching(/scale(_.+)?=354:-2/)]),
+          outputOptions: expect.arrayContaining([expect.stringMatching(/scale(_.+)?=-2:1586/)]),
           twoPass: false,
         }),
       );
@@ -2140,7 +2140,7 @@ describe(MediaService.name, () => {
             '-refs 5',
             '-g 256',
             '-v verbose',
-            '-vf hwupload=extra_hw_frames=64,scale_qsv=-1:720:mode=hq:format=nv12',
+            '-vf hwupload=extra_hw_frames=64,scale_qsv=720:-1:mode=hq:format=nv12',
             '-preset 7',
             '-global_quality:v 23',
             '-maxrate 10000k',
@@ -2264,7 +2264,7 @@ describe(MediaService.name, () => {
             '-threads 1',
             '-qsv_device /dev/dri/renderD128',
           ]),
-          outputOptions: expect.arrayContaining([expect.stringContaining('scale_qsv=-1:720:async_depth=4:mode=hq')]),
+          outputOptions: expect.arrayContaining([expect.stringContaining('scale_qsv=720:-1:async_depth=4:mode=hq')]),
           twoPass: false,
         }),
       );
