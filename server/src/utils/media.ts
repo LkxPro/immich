@@ -227,7 +227,7 @@ export class BaseConfig implements VideoCodecSWConfig {
     let target;
     target =
       this.config.targetResolution === 'original'
-        ? Math.min(videoStream.height, videoStream.width)
+        ? Math.max(videoStream.height, videoStream.width)
         : Number.parseInt(this.config.targetResolution);
 
     if (target % 2 !== 0) {
@@ -239,7 +239,7 @@ export class BaseConfig implements VideoCodecSWConfig {
 
   shouldScale(videoStream: VideoStreamInfo) {
     const oddDimensions = videoStream.height % 2 !== 0 || videoStream.width % 2 !== 0;
-    const largerThanTarget = Math.min(videoStream.height, videoStream.width) > this.getTargetResolution(videoStream);
+    const largerThanTarget = Math.max(videoStream.height, videoStream.width) > this.getTargetResolution(videoStream);
     return oddDimensions || largerThanTarget;
   }
 
@@ -249,15 +249,15 @@ export class BaseConfig implements VideoCodecSWConfig {
 
   getScaling(videoStream: VideoStreamInfo, mult = 2) {
     const targetResolution = this.getTargetResolution(videoStream);
-    return this.isVideoVertical(videoStream) ? `${targetResolution}:-${mult}` : `-${mult}:${targetResolution}`;
+    return this.isVideoVertical(videoStream) ? `-${mult}:${targetResolution}` : `${targetResolution}:-${mult}`;
   }
 
   getSize(videoStream: VideoStreamInfo) {
-    const smaller = this.getTargetResolution(videoStream);
-    const factor = Math.max(videoStream.height, videoStream.width) / Math.min(videoStream.height, videoStream.width);
-    let larger = Math.round(smaller * factor);
-    if (larger % 2 !== 0) {
-      larger -= 1;
+    const larger = this.getTargetResolution(videoStream);
+    const factor = Math.min(videoStream.height, videoStream.width) / Math.max(videoStream.height, videoStream.width);
+    let smaller = Math.round(larger * factor);
+    if (smaller % 2 !== 0) {
+      smaller -= 1;
     }
     return this.isVideoVertical(videoStream) ? { width: smaller, height: larger } : { width: larger, height: smaller };
   }
