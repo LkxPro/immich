@@ -396,6 +396,7 @@
   "advanced_settings_prefer_remote_title": "Suosi etäkuvia",
   "advanced_settings_proxy_headers_subtitle": "Määritä välityspalvelimen otsikot(proxy headers), jotka Immichin tulisi lähettää jokaisen verkkopyynnön mukana",
   "advanced_settings_proxy_headers_title": "Välityspalvelimen otsikot",
+  "advanced_settings_readonly_mode_title": "Vain luku -tila",
   "advanced_settings_self_signed_ssl_subtitle": "Ohita SSL sertifikaattivarmennus palvelimen päätepisteellä. Vaaditaan self-signed -sertifikaateissa.",
   "advanced_settings_self_signed_ssl_title": "Salli self-signed SSL -sertifikaatit",
   "advanced_settings_sync_remote_deletions_subtitle": "Poista tai palauta kohde automaattisesti tällä laitteella, kun kyseinen toiminto suoritetaan verkossa",
