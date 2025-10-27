@@ -493,7 +493,7 @@ describe(MediaService.name, () => {
         expect.any(String),
         expect.objectContaining({
           inputOptions: expect.any(Array),
-          outputOptions: expect.arrayContaining([expect.stringContaining('scale=-2:1440')]),
+          outputOptions: expect.arrayContaining([expect.stringContaining('scale=1440:-2')]),
           twoPass: false,
         }),
       );
@@ -1478,7 +1478,7 @@ describe(MediaService.name, () => {
         expect.any(String),
         expect.objectContaining({
           inputOptions: expect.any(Array),
-          outputOptions: expect.arrayContaining([expect.stringMatching(/scale(_.+)?=-2:720/)]),
+          outputOptions: expect.arrayContaining([expect.stringMatching(/scale(_.+)?=720:-2/)]),
           twoPass: false,
         }),
       );
@@ -1493,7 +1493,7 @@ describe(MediaService.name, () => {
         expect.any(String),
         expect.objectContaining({
           inputOptions: expect.any(Array),
-          outputOptions: expect.arrayContaining([expect.stringMatching(/scale(_.+)?=720:-2/)]),
+          outputOptions: expect.arrayContaining([expect.stringMatching(/scale(_.+)?=-2:720/)]),
           twoPass: false,
         }),
       );
@@ -1510,7 +1510,7 @@ describe(MediaService.name, () => {
         expect.any(String),
         expect.objectContaining({
           inputOptions: expect.any(Array),
-          outputOptions: expect.arrayContaining([expect.stringMatching(/scale(_.+)?=-2:354/)]),
+          outputOptions: expect.arrayContaining([expect.stringMatching(/scale(_.+)?=1586:-2/)]),
           twoPass: false,
         }),
       );
@@ -1527,7 +1527,7 @@ describe(MediaService.name, () => {
         expect.any(String),
         expect.objectContaining({
           inputOptions: expect.any(Array),
-          outputOptions: expect.arrayContaining([expect.stringMatching(/scale(_.+)?=354:-2/)]),
+          outputOptions: expect.arrayContaining([expect.stringMatching(/scale(_.+)?=-2:1586/)]),
           twoPass: false,
         }),
       );
@@ -1888,7 +1888,7 @@ describe(MediaService.name, () => {
             '-map 0:0',
             '-map 0:3',
             '-v verbose',
-            '-vf scale=-2:720',
+            '-vf scale=720:-2',
             '-preset 12',
             '-crf 23',
           ]),
@@ -2010,7 +2010,7 @@ describe(MediaService.name, () => {
             '-map 0:3',
             '-g 256',
             '-v verbose',
-            '-vf hwupload_cuda,scale_cuda=-2:720:format=nv12',
+            '-vf hwupload_cuda,scale_cuda=720:-2:format=nv12',
             '-preset p1',
             '-cq:v 23',
           ]),
@@ -2122,7 +2122,7 @@ describe(MediaService.name, () => {
             '-noautorotate',
             '-threads 1',
           ]),
-          outputOptions: expect.arrayContaining([expect.stringContaining('scale_cuda=-2:720:format=nv12')]),
+          outputOptions: expect.arrayContaining([expect.stringContaining('scale_cuda=720:-2:format=nv12')]),
           twoPass: false,
         }),
       );
@@ -2160,7 +2160,7 @@ describe(MediaService.name, () => {
         expect.any(String),
         expect.objectContaining({
           inputOptions: expect.arrayContaining(['-hwaccel cuda', '-hwaccel_output_format cuda']),
-          outputOptions: expect.arrayContaining([expect.stringContaining('scale_cuda=-2:720:format=nv12')]),
+          outputOptions: expect.arrayContaining([expect.stringContaining('scale_cuda=720:-2:format=nv12')]),
           twoPass: false,
         }),
       );
@@ -2191,7 +2191,7 @@ describe(MediaService.name, () => {
             '-refs 5',
             '-g 256',
             '-v verbose',
-            '-vf hwupload=extra_hw_frames=64,scale_qsv=-1:720:mode=hq:format=nv12',
+            '-vf hwupload=extra_hw_frames=64,scale_qsv=720:-1:mode=hq:format=nv12',
             '-preset 7',
             '-global_quality:v 23',
             '-maxrate 10000k',
@@ -2315,7 +2315,7 @@ describe(MediaService.name, () => {
             '-threads 1',
             '-qsv_device /dev/dri/renderD128',
           ]),
-          outputOptions: expect.arrayContaining([expect.stringContaining('scale_qsv=-1:720:async_depth=4:mode=hq')]),
+          outputOptions: expect.arrayContaining([expect.stringContaining('scale_qsv=720:-1:async_depth=4:mode=hq')]),
           twoPass: false,
         }),
       );
@@ -2413,7 +2413,7 @@ describe(MediaService.name, () => {
             '-map 0:3',
             '-g 256',
             '-v verbose',
-            '-vf hwupload=extra_hw_frames=64,scale_vaapi=-2:720:mode=hq:out_range=pc:format=nv12',
+            '-vf hwupload=extra_hw_frames=64,scale_vaapi=720:-2:mode=hq:out_range=pc:format=nv12',
             '-compression_level 7',
             '-rc_mode 1',
           ]),
@@ -2551,7 +2551,7 @@ describe(MediaService.name, () => {
             '-threads 1',
             '-hwaccel_device /dev/dri/renderD128',
           ]),
-          outputOptions: expect.arrayContaining([expect.stringContaining('scale_vaapi=-2:720:mode=hq:out_range=pc')]),
+          outputOptions: expect.arrayContaining([expect.stringContaining('scale_vaapi=720:-2:mode=hq:out_range=pc')]),
           twoPass: false,
         }),
       );
@@ -2710,7 +2710,7 @@ describe(MediaService.name, () => {
             '-map 0:3',
             '-g 256',
             '-v verbose',
-            '-vf scale_rkrga=-2:720:format=nv12:afbc=1:async_depth=4',
+            '-vf scale_rkrga=720:-2:format=nv12:afbc=1:async_depth=4',
             '-level 51',
             '-rc_mode CQP',
             '-qp_init 23',
@@ -2772,7 +2772,7 @@ describe(MediaService.name, () => {
           inputOptions: expect.arrayContaining(['-hwaccel rkmpp', '-hwaccel_output_format drm_prime', '-afbc rga']),
           outputOptions: expect.arrayContaining([
             expect.stringContaining(
-              'scale_rkrga=-2:720:format=p010:afbc=1:async_depth=4,hwmap=derive_device=opencl:mode=read,tonemap_opencl=format=nv12:r=pc:p=bt709:t=bt709:m=bt709:tonemap=hable:desat=0:tonemap_mode=lum:peak=100,hwmap=derive_device=rkmpp:mode=write:reverse=1,format=drm_prime',
+              'scale_rkrga=720:-2:format=p010:afbc=1:async_depth=4,hwmap=derive_device=opencl:mode=read,tonemap_opencl=format=nv12:r=pc:p=bt709:t=bt709:m=bt709:tonemap=hable:desat=0:tonemap_mode=lum:peak=100,hwmap=derive_device=rkmpp:mode=write:reverse=1,format=drm_prime',
             ),
           ]),
           twoPass: false,
@@ -2793,7 +2793,7 @@ describe(MediaService.name, () => {
         expect.objectContaining({
           inputOptions: expect.arrayContaining(['-hwaccel rkmpp', '-hwaccel_output_format drm_prime', '-afbc rga']),
           outputOptions: expect.arrayContaining([
-            expect.stringContaining('scale_rkrga=-2:720:format=nv12:afbc=1:async_depth=4'),
+            expect.stringContaining('scale_rkrga=720:-2:format=nv12:afbc=1:async_depth=4'),
           ]),
           twoPass: false,
         }),
@@ -2905,7 +2905,7 @@ describe(MediaService.name, () => {
         expect.any(String),
         expect.objectContaining({
           inputOptions: expect.any(Array),
-          outputOptions: expect.arrayContaining(['-c:v h264', '-c:a copy', '-vf scale=-2:720,format=yuv420p']),
+          outputOptions: expect.arrayContaining(['-c:v h264', '-c:a copy', '-vf scale=720:-2,format=yuv420p']),
           twoPass: false,
         }),
       );
